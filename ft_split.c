@@ -1,80 +1,103 @@
-/*Function name 
-ft_split
-Prototype char 
-**ft_split(char const *s, char c);
-Turn in files -
-Parameters s: The string to be split.
-c: The delimiter character.
-Return value The array of new strings resulting from the split.
-NULL if the allocation fails.
-External functs. malloc, free
-Description Allocates (with malloc(3)) and returns an array
-of strings obtained by splitting ’s’ using the
-character ’c’ as a delimiter. The array must end
-with a NULL pointer.
-s = "hel.lo. w.o.rl.d"
-c = .
-return = hel lo w o rl d
-all as seperate words. with a null terminator at d
-gotta create an array that points to the pointer of s.
-so its like **temp --> *s --> "he"
 
-int main() {
-    char *str = "hello world";//pointer points to h
-    char **ptr = &str;//pointer points to the dereferenced value of pointer str so helloworld 
-    printf("%s", *ptr);//derefence pointer. 
-    return 0;
-}
-*/
-#include <stdio.h>
-#include <stddef.h>
 #include <stdlib.h>
 #include <string.h>
+#include <stdio.h>
+#include <stdbool.h>
+
+int count_words(const char *s, char c)
+{
+    int count = 0;
+    int flag = 0;
+    while (*s != '\0')
+    {
+        if (*s == c)
+            flag = 0;
+        if (*s != c && !flag)
+        {
+            flag = 1;
+            count++;
+        }
+        s++;
+    }
+    return count;
+}
+int count_len(const char *s, char c)
+{
+    int i = 0;
+    while (s[i] != '\0') {
+        if (s[i] == c) 
+            break;
+        i++;
+    }
+    return i;
+}
+void ft_free(char **ptr, int i)
+{
+    while (i > 0)
+    {
+        free(ptr[i-1]);
+        i--;
+    }
+    free(ptr);
+}
 char **ft_split(char const *s, char c)
 {
-    //do not have to copy i can use strcpy
-    int len_c = 0;
-    int i = 0;
-    while(s[i] != '\0')
-    {
-        if (s[i] == c)
-        {
-            len_c++;
-        }
-        i++;
-    }
-    char **str_list = (char **)malloc((len_c + 2) * sizeof(char *)); 
+    char **ptr;
+    int i;
+    int word_len;
+    
+    ptr = malloc((count_words(s, c) + 1) * sizeof(char *));
+    if (ptr == NULL) 
+        return NULL;
     i = 0;
-    int j = 0;
-    int start = 0;
-    while (i < len_c+1)
+    while (*s != '\0') 
     {
-        while (s[j] != c && s[j] != '\0')//while we are not at a full stop. 
+        if ((word_len = count_len(s, c)) > 0) 
         {
-            j++;//increment by 1. 
+            ptr[i] = malloc(word_len+1);
+            if (ptr[i] == NULL)
+            {
+                ft_free(ptr, i);
+                return NULL;
+            }
+            strncpy(ptr[i], s, word_len);
+            ptr[i++][word_len] = '\0';
+            s += word_len;
         }
-        start = j;
-        char *temp = malloc(start+1);//assign memory for all those values 
-        strncpy(temp, s, start);//copy those values of s into temp until j. 
-        temp[j] = '\0';
-        str_list[i] = temp;
-        i++;
-        if (s[j] == c)
-        {
-            j++;
-        }
+        while (*s == c)
+            s++;
     }
-    str_list[len_c] = NULL;
-    for (int i = 0; i < len_c+1; i++) {
-        printf("[%d]: %s\n", i, str_list[i]);
-    }
-    return str_list;   
+    ptr[i] = NULL;
+    return ptr;
 }
 
-int main()
-{
-    const char *s = "hel.lo. w.o.rl. d";
-    char c = '.';
-    char **temp = ft_split(s, c);
-    printf("ignore: %s", *temp);
+int main() {
+    char *str = "-hello--world-my--";
+    char delimiter = '-';
+    
+    char **split = ft_split(str, delimiter);
+    int i = 0;
+    
+    // Print the split strings
+    while (split[i] != NULL) {
+        printf("%s\n", split[i]);
+        i++;
+    }
+    
+    // Free allocated memory
+    
+    return 0;
 }
+/*
+    1. calculate the length of the string up until c - count_len
+    2. create a pointer for that - 
+    3. store that value into **ptr.
+
+    malloc assigning of the array size based on the count
+
+    iterating through the string and when coming across 
+    a c then up until that point add all those values to i++
+    of the array until we reach the end of the string. 
+    once we reach the end of the string we null terminate the
+    array and print it out.*/
+
