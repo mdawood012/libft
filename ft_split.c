@@ -40,15 +40,11 @@ void ft_free(char **ptr, int i)
     }
     free(ptr);
 }
-char **ft_split(char const *s, char c)
+
+char **temp(char const *s, char c, char **ptr, int word_len)
 {
-    char **ptr;
     int i;
-    int word_len;
-    
-    ptr = malloc((count_words(s, c) + 1) * sizeof(char *));
-    if (ptr == NULL) 
-        return NULL;
+
     i = 0;
     while (*s != '\0') 
     {
@@ -68,6 +64,18 @@ char **ft_split(char const *s, char c)
             s++;
     }
     ptr[i] = NULL;
+    return ptr; 
+}
+char **ft_split(char const *s, char c)
+{
+    char **ptr;
+    int word_len;
+
+    word_len = 0;
+    ptr = malloc((count_words(s, c) + 1) * sizeof(char *));
+    if (ptr == NULL) 
+        return NULL;
+    ptr = temp(s, c, ptr, word_len);
     return ptr;
 }
 
