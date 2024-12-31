@@ -1,27 +1,34 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_striteri.c                                      :+:      :+:    :+:   */
+/*   ft_toupper.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: mdawood <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/12/11 17:32:25 by mdawood           #+#    #+#             */
-/*   Updated: 2024/12/11 17:34:04 by mdawood          ###   ########.fr       */
+/*   Created: 2024/12/04 12:32:49 by mdawood           #+#    #+#             */
+/*   Updated: 2024/12/07 16:54:16 by mdawood          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 #include "libft.h"
 
-void	ft_striteri(char *s, void (*f)(unsigned int, char*))
+int	ft_toupper(int c)
 {
-	unsigned int	i;
-
-	if (!s)
-		return ;
-	i = 0;
-	while (s[i] != '\0')
+	if (c >= 97 && c <= 122)
 	{
-		(*f)(i, &s[i]);
-		i++;
+		c -= 32;
 	}
-	s[i] = '\0';
+	return (c);
 }
+/*
+#include <ctype.h>
+#include <stdio.h>
+
+int	main()
+{
+	char c = '/';
+	int result = toupper(c);
+	int result1 = ft_toupper(c);
+	printf("%c", result);
+	printf("%c", result1);
+	return 0;
+}*/

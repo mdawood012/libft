@@ -1,27 +1,36 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_striteri.c                                      :+:      :+:    :+:   */
+/*   ft_strlen.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: mdawood <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/12/11 17:32:25 by mdawood           #+#    #+#             */
-/*   Updated: 2024/12/11 17:34:04 by mdawood          ###   ########.fr       */
+/*   Created: 2024/11/30 18:22:45 by mdawood           #+#    #+#             */
+/*   Updated: 2024/12/16 13:53:38 by mdawood          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 #include "libft.h"
 
-void	ft_striteri(char *s, void (*f)(unsigned int, char*))
+size_t	ft_strlen(const char *s)
 {
-	unsigned int	i;
+	int	len;
 
-	if (!s)
-		return ;
-	i = 0;
-	while (s[i] != '\0')
+	len = 0;
+	while (s[len] != '\0')
 	{
-		(*f)(i, &s[i]);
-		i++;
+		len++;
 	}
-	s[i] = '\0';
+	return (len);
 }
+/*
+#include <stdio.h>
+#include <string.h>
+int	main()
+{
+	char str[] = "hello";
+	int length = ft_strlen(str);
+	int length2 = strlen(str);
+	printf("%d", length);
+	printf("%d", length2);
+}
+*/	

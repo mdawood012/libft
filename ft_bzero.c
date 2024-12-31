@@ -1,27 +1,25 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_striteri.c                                      :+:      :+:    :+:   */
+/*   ft_bzero.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: mdawood <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/12/11 17:32:25 by mdawood           #+#    #+#             */
-/*   Updated: 2024/12/11 17:34:04 by mdawood          ###   ########.fr       */
+/*   Created: 2024/12/03 12:17:12 by mdawood           #+#    #+#             */
+/*   Updated: 2024/12/16 14:41:36 by mdawood          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 #include "libft.h"
 
-void	ft_striteri(char *s, void (*f)(unsigned int, char*))
+void	ft_bzero(void *s, size_t n)
 {
-	unsigned int	i;
+	char	*word;
 
-	if (!s)
-		return ;
-	i = 0;
-	while (s[i] != '\0')
+	word = s;
+	while (n > 0)
 	{
-		(*f)(i, &s[i]);
-		i++;
+		*word = '\0';
+		n--;
+		word++;
 	}
-	s[i] = '\0';
 }

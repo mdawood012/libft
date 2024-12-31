@@ -1,27 +1,36 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_striteri.c                                      :+:      :+:    :+:   */
+/*   ft_tolower.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: mdawood <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/12/11 17:32:25 by mdawood           #+#    #+#             */
-/*   Updated: 2024/12/11 17:34:04 by mdawood          ###   ########.fr       */
+/*   Created: 2024/12/04 12:41:02 by mdawood           #+#    #+#             */
+/*   Updated: 2024/12/07 16:54:26 by mdawood          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 #include "libft.h"
 
-void	ft_striteri(char *s, void (*f)(unsigned int, char*))
+int	ft_tolower(int c)
 {
-	unsigned int	i;
-
-	if (!s)
-		return ;
-	i = 0;
-	while (s[i] != '\0')
+	if (c >= 65 && c <= 90)
 	{
-		(*f)(i, &s[i]);
-		i++;
+		c += 32;
 	}
-	s[i] = '\0';
+	return (c);
 }
+/*
+#include <ctype.h>
+#include <stdio.h>
+
+int     main()
+{
+        char c = '/';
+	printf("%c\n", c);
+        //int result = tolower(c);
+        int result1 = ft_tolower(c);
+        //printf("now %c", result);
+        printf("now %c", result1);
+        return 0;
+}
+*/

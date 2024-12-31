@@ -1,44 +1,44 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_substr.c                                        :+:      :+:    :+:   */
+/*   ft_strdup.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: mdawood <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/12/11 14:17:34 by mdawood           #+#    #+#             */
-/*   Updated: 2024/12/19 15:13:45 by mdawood          ###   ########.fr       */
+/*   Created: 2024/12/07 16:10:58 by mdawood           #+#    #+#             */
+/*   Updated: 2024/12/07 16:57:00 by mdawood          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 #include "libft.h"
 
-char	*ft_substr(char const *s, unsigned int start, size_t len)
+char	*ft_strdup(const char *s1)
 {
-	char			*ptr;
-	unsigned int	i;
-	unsigned int	s_len;
+	char	*ptr;
+	int		i;
 
-	s_len = ft_strlen(s);
-	if (s_len <= start)
-		len = 0;
-	if (len >= s_len - start)
-		len = s_len - start;
-	ptr = malloc(len + 1);
-	if (!ptr)
-		return (NULL);
+	ptr = (char *)malloc(ft_strlen(s1) + 1);
 	i = 0;
-	while (i < len)
+	if (ptr == NULL)
+		return (NULL);
+	while (s1[i] != '\0')
 	{
-		ptr[i] = s[start + i];
-		i ++;
+		ptr[i] = s1[i];
+		i++;
 	}
 	ptr[i] = '\0';
 	return (ptr);
 }
-// }
-// #include <stdio.h>
-// int	main(void)
-// {
-// 	char *ptr = ft_substr("trip", 100, 1);
-// 	printf("%c", ptr[1]);
-// 	return (0);
-// }
+/*
+#include <string.h>
+#include <stdio.h>
+int main()
+{
+    const char *s1 = "hello world";
+    const char *s2 = ft_strdup(s1);
+    while (*s2 != '\0')
+    {
+        printf("%c", *s2);
+        s2++;
+    }
+
+}*/

@@ -1,44 +1,34 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_substr.c                                        :+:      :+:    :+:   */
+/*   ft_calloc.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: mdawood <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/12/11 14:17:34 by mdawood           #+#    #+#             */
-/*   Updated: 2024/12/19 15:13:45 by mdawood          ###   ########.fr       */
+/*   Created: 2024/12/07 14:09:57 by mdawood           #+#    #+#             */
+/*   Updated: 2024/12/19 15:16:54 by mdawood          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 #include "libft.h"
 
-char	*ft_substr(char const *s, unsigned int start, size_t len)
+void	*ft_calloc(size_t nmemb, size_t size)
 {
-	char			*ptr;
-	unsigned int	i;
-	unsigned int	s_len;
+	void	*ptr;
 
-	s_len = ft_strlen(s);
-	if (s_len <= start)
-		len = 0;
-	if (len >= s_len - start)
-		len = s_len - start;
-	ptr = malloc(len + 1);
+	if (size && nmemb > ((size_t) - 1 / size))
+		return (NULL);
+	ptr = malloc(nmemb * size);
 	if (!ptr)
 		return (NULL);
-	i = 0;
-	while (i < len)
-	{
-		ptr[i] = s[start + i];
-		i ++;
-	}
-	ptr[i] = '\0';
+	ft_bzero(ptr, (nmemb * size));
 	return (ptr);
 }
-// }
-// #include <stdio.h>
-// int	main(void)
+// int main(void)
 // {
-// 	char *ptr = ft_substr("trip", 100, 1);
-// 	printf("%c", ptr[1]);
-// 	return (0);
+// 	char *ptr = calloc(-5, 0);
+//     printf("Values of allocated_with_calloc: ");
+//     for (size_t i = 0; i < 5; ++i) 
+// 	{
+//         printf("%d ", ptr[i]);
+//     }
 // }

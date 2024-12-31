@@ -1,27 +1,32 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_striteri.c                                      :+:      :+:    :+:   */
+/*   ft_memcmp.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: mdawood <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/12/11 17:32:25 by mdawood           #+#    #+#             */
-/*   Updated: 2024/12/11 17:34:04 by mdawood          ###   ########.fr       */
+/*   Created: 2024/12/12 12:52:06 by mdawood           #+#    #+#             */
+/*   Updated: 2024/12/12 12:53:45 by mdawood          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 #include "libft.h"
 
-void	ft_striteri(char *s, void (*f)(unsigned int, char*))
+int	ft_memcmp(const void *s1, const void *s2, size_t n)
 {
-	unsigned int	i;
+	const unsigned char	*ft_s1;
+	const unsigned char	*ft_s2;
+	size_t				i;
 
-	if (!s)
-		return ;
+	ft_s1 = s1;
+	ft_s2 = s2;
 	i = 0;
-	while (s[i] != '\0')
+	if (n == 0)
+		return (0);
+	while (i < n)
 	{
-		(*f)(i, &s[i]);
+		if (ft_s1[i] != ft_s2[i])
+			return (ft_s1[i] - ft_s2[i]);
 		i++;
 	}
-	s[i] = '\0';
+	return (0);
 }
